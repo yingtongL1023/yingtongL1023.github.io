@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Photo Gallery | Yingtong Luo</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+}
+
+/* NAVBAR */
+
+nav{
+    position:sticky;
+    top:0;
+    background:white;
+    border-bottom:1px solid #ddd;
+}
+
+nav ul{
+    display:flex;
+    justify-content:center;
+    list-style:none;
+    margin:0;
+    padding:12px;
+}
+
+nav li{
+    margin:0 22px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#000;
+    font-weight:500;
+}
+
+nav a:hover{
+    color:#0073e6;
+}
+
+/* PAGE */
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+h1{
+    margin-bottom:40px;
+}
+
+/* GALLERY GRID */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+}
+
+.gallery-item img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:8px;
+    cursor:pointer;
+    transition:transform 0.25s ease;
+}
+
+.gallery-item img:hover{
+    transform:scale(1.05);
+}
+
+/* LOCATION TEXT */
+
+.photo-location{
+    margin-top:8px;
+    font-size:14px;
+    color:#555;
+}
+
+.photo-location i{
+    margin-right:6px;
+    color:#888;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:85%;
+    border-radius:10px;
+}
+
+.lightbox-close{
+    position:absolute;
+    top:25px;
+    right:40px;
+    font-size:40px;
+    color:white;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    font-size:14px;
+    color:#666;
+    margin-top:60px;
+    padding:30px 0;
+    border-top:1px solid #eee;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<nav>
+<ul>
+<li><a href="index.html#about">About</a></li>
+<li><a href="index.html#news">News</a></li>
+<li><a href="index.html#publications">Publications</a></li>
+<li><a href="index.html#projects">Projects</a></li>
+<li><a href="index.html#volunteering">Volunteering</a></li>
+<li><a href="gallery.html">Photo Gallery</a></li>
+</ul>
+</nav>
+
+
+<div class="container">
+
+<h1>Photo Gallery</h1>
+
+<div class="gallery-grid">
+
+<div class="gallery-item">
+<img src="images/gallery/Moraine_lake.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Moraine Lake, AB
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Yoho_park.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Yoho National Park, BC
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Yoho_park2.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Yoho National Park, BC
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Yoho_park3.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Yoho National Park, BC
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Canmore.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Canmore, AB
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Vancouver.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Vancouver, BC
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Tremblent.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Mont Tremblant, QC
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Cancun.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Cancun, Mexico
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Tulum.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Tulum, Mexico
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/solar_eclipse.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Montreal, QC
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/NASA1.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Orlando, FL
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/NASA2.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Orlando, FL
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/NASA3.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Orlando, FL
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Artemis2.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Cape Canaveral, FL
+</div>
+</div>
+
+<div class="gallery-item">
+<img src="images/gallery/Lima1.jpg">
+<div class="photo-location">
+<i class="fa-solid fa-location-dot"></i>Lima, Peru
+</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+
+<span class="lightbox-close" onclick="closeLightbox()">×</span>
+
+<img id="lightbox-img">
+
+</div>
+
+
+<script>
+
+const images = document.querySelectorAll(".gallery-item img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+
+images.forEach(img => {
+    img.addEventListener("click", () => {
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+    });
+});
+
+function closeLightbox(){
+    lightbox.style.display = "none";
+}
+
+lightbox.addEventListener("click", e => {
+    if(e.target !== lightboxImg){
+        closeLightbox();
+    }
+});
+
+</script>
+
+<footer class="footer">
+© 2026 Yingtong Luo. Last updated: March 2026.
+</footer>
+
+</body>
+</html>
