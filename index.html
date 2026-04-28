@@ -7,301 +7,343 @@
 
 <title>Yingtong Luo</title>
 
-<!-- Font Awesome for icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-/* GENERAL */
-
-body{
-    font-family: Arial, sans-serif;
-    margin:0;
-    line-height:1.6;
+:root{
+    --bg-page:#f4f6f9;
+    --bg-card:#fff;
+    --text:#1c2333;
+    --text-muted:#5c6578;
+    --border:#e2e6ed;
+    --accent:#1e4d8c;
+    --accent-hover:#2563eb;
+    --accent-soft:#e8f0fe;
+    --shadow:0 1px 3px rgba(28,35,51,.08),0 4px 12px rgba(28,35,51,.04);
+    --shadow-hover:0 4px 12px rgba(28,35,51,.1),0 8px 24px rgba(28,35,51,.06);
+    --radius:12px;
+    --nav-h:52px;
 }
 
 html{
     scroll-behavior:smooth;
 }
 
-/* NAVBAR */
+@media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+}
+
+body{
+    font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;
+    margin:0;
+    line-height:1.65;
+    color:var(--text);
+    background:var(--bg-page);
+}
+
+body::before{
+    content:"";
+    display:block;
+    height:3px;
+    background:linear-gradient(90deg,#0f2744,var(--accent-hover),#0f2744);
+}
 
 nav{
     position:sticky;
     top:0;
-    background:white;
-    border-bottom:1px solid #ddd;
+    z-index:50;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:saturate(180%) blur(10px);
+    -webkit-backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 1px 0 rgba(255,255,255,.6) inset;
 }
 
 nav ul{
     display:flex;
     justify-content:center;
+    flex-wrap:wrap;
     list-style:none;
     margin:0;
-    padding:12px;
+    padding:10px 12px;
+    gap:4px 8px;
 }
 
 nav li{
-    margin:0 22px;
+    margin:0 14px;
 }
 
 nav a{
     text-decoration:none;
-    color:#000;
+    color:var(--text);
     font-weight:500;
+    font-size:15px;
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:color .2s ease,border-color .2s ease;
 }
 
 nav a:hover{
-    color:#0073e6;
+    color:var(--accent-hover);
 }
 
-/* SECTIONS */
+nav a.active{
+    color:var(--accent);
+    border-bottom-color:var(--accent-hover);
+}
 
 section{
     max-width:900px;
     margin:auto;
-    padding:80px 20px;
+    padding:72px 20px;
+    scroll-margin-top:calc(var(--nav-h) + 12px);
 }
 
-/* ABOUT LAYOUT */
+#about{
+    padding-top:56px;
+}
 
 .about-container{
     display:flex;
-    align-items:center;
-    gap:40px;
+    align-items:flex-start;
+    gap:44px;
 }
-
-/* PROFILE IMAGE */
 
 .profile-pic{
     width:280px;
     height:280px;
     object-fit:cover;
-    border-radius:10px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    border:1px solid var(--border);
 }
 
-/* TITLES */
-
 h1{
-    margin-bottom:5px;
+    margin:0 0 8px;
+    font-size:2rem;
+    font-weight:700;
+    letter-spacing:-.02em;
+    line-height:1.2;
 }
 
 h2{
-    border-bottom:2px solid #eee;
-    padding-bottom:10px;
+    font-weight:700;
+    font-size:1.35rem;
+    letter-spacing:-.01em;
+    border-bottom:2px solid var(--border);
+    padding-bottom:12px;
+    margin:0 0 28px;
 }
-
-/* LIST STYLE */
 
 ul{
     padding-left:20px;
 }
 
-/* ICON BUTTONS */
+#news li{
+    margin-bottom:16px;
+    line-height:1.65;
+}
+
+/* Keep a period (or comma) on the same line as the preceding link */
+#news .hang-punct{
+    white-space:nowrap;
+}
 
 .icon-row{
-    margin-top:20px;
+    margin-top:22px;
     display:flex;
-    gap:20px;
+    gap:14px;
+    flex-wrap:wrap;
 }
 
 .icon-btn{
-    width:50px;
-    height:50px;
+    width:48px;
+    height:48px;
     border-radius:50%;
-    border:1px solid #ccc;
+    border:1px solid var(--border);
+    background:var(--bg-card);
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:20px;
-    color:#333;
+    font-size:18px;
+    color:var(--accent-hover);
     text-decoration:none;
-    transition:all 0.2s ease;
+    box-shadow:var(--shadow);
+    transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease;
+}
+
+.icon-btn:visited{
+    color:var(--accent-hover);
 }
 
 .icon-btn:hover{
-    background:#0073e6;
-    color:white;
-    border-color:#0073e6;
-    transform:translateY(-3px);
+    background:var(--accent);
+    color:#fff;
+    border-color:var(--accent);
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-hover);
 }
 
-
-/* NEW ADDED */
-
-#news li{
-    margin-bottom:16px;
-    line-height:1.6;
+.icon-btn i{
+    color:inherit;
 }
-
-
-/* PUBLICATIONS */
 
 .publication{
     display:flex;
-    gap:25px;
-    margin-bottom:30px;
+    gap:24px;
+    align-items:flex-start;
+    background:var(--bg-card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px 24px;
+    box-shadow:var(--shadow);
+    transition:box-shadow .25s ease,transform .25s ease;
+}
+
+.publication:hover{
+    box-shadow:var(--shadow-hover);
+    transform:translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce){
+    .publication:hover,
+    .icon-btn:hover{
+        transform:none;
+    }
+    .publication,
+    .icon-btn{
+        transition:none;
+    }
 }
 
 .pub-image{
-    width:180px;
-    height:auto;
+    width:176px;
+    flex-shrink:0;
 }
 
 .pub-image img{
     width:100%;
-    border-radius:6px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    display:block;
 }
 
 .pub-content{
     flex:1;
+    min-width:0;
 }
 
 .pub-title{
     font-weight:600;
-    font-size:18px;
-    margin-bottom:6px;
+    font-size:1.05rem;
+    margin-bottom:8px;
+    line-height:1.35;
 }
 
 .pub-authors{
-    color:#555;
+    color:var(--text-muted);
     font-size:14px;
-    margin-bottom:4px;
+    margin-bottom:6px;
 }
 
 .pub-venue{
     font-style:italic;
-    color:#555;
-    margin-bottom:6px;
+    color:var(--text-muted);
+    font-size:14px;
+    margin-bottom:8px;
 }
 
 .pub-links a{
     text-decoration:none;
-    margin-right:10px;
+    margin-right:12px;
+    font-weight:500;
 }
 
 .pub-divider{
-    border-top:1px solid #e5e5e5;
-    margin:30px 0;
+    height:20px;
+    border:none;
+    margin:0;
 }
 
-
-/* LINKS */
-
 a{
-    color:#3d9cfc;
+    color:var(--accent-hover);
     text-decoration:none;
 }
 
 a:visited{
-    color:#4da6ff;
+    color:#3b7dd6;
 }
 
 a:hover{
-    color:#0073e6;
-}
-
-/* NAVBAR LINKS */
-
-nav a,
-nav a:visited{
-    color:#000;
+    color:var(--accent);
+    text-decoration:underline;
+    text-underline-offset:2px;
 }
 
 nav a:hover{
-    color:#0073e6;
-}
-
-nav a:active{
-    color:#000;
-}
-
-
-/* ICON OVERWRITE*/
-
-.icon-btn{
-    width:50px;
-    height:50px;
-    border-radius:50%;
-    border:1px solid #ccc;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
-    color:#333;
     text-decoration:none;
-    transition:all 0.2s ease;
 }
 
-.icon-btn:hover{
-    background:#0073e6;
-    color:white;
-    border-color:#0073e6;
-    transform:translateY(-3px);
+nav a,
+nav a:visited{
+    color:var(--text);
 }
 
-/* ICON COLOR FIX */
-
-.icon-btn i{
-    color:#000;
+nav a.active:visited{
+    color:var(--accent);
 }
-
-.icon-btn:hover i{
-    color:white;
-}
-
-/* FOOTER */
 
 .footer{
     text-align:center;
     font-size:14px;
-    color:#666;
-    margin-top:60px;
-    padding:30px 0;
-    border-top:1px solid #eee;
+    color:var(--text-muted);
+    margin-top:40px;
+    padding:28px 16px 40px;
+    border-top:1px solid var(--border);
+    background:var(--bg-page);
 }
 
-/* MOBILE RESPONSIVE */
-
 @media (max-width: 768px){
-
-/* About section vertical */
 
 .about-container{
     flex-direction:column;
     align-items:center;
     text-align:center;
 }
-
-/* Profile image smaller */
 
 .profile-pic{
     width:200px;
     height:200px;
 }
 
-/* Publications stack */
-
 .publication{
     flex-direction:column;
 }
 
 .pub-image{
     width:100%;
+    max-width:320px;
+    margin-inline:auto;
 }
 
-/* Navigation spacing */
-
 nav ul{
-    flex-wrap:wrap;
+    padding:8px;
 }
 
 nav li{
-    margin:8px 12px;
+    margin:6px 10px;
+}
+
+.icon-row{
+    justify-content:center;
 }
 
 }
-
 
 </style>
 
@@ -310,48 +352,39 @@ nav li{
 
 <body>
 
-<!-- NAVBAR -->
-
-<nav>
+<nav aria-label="Primary">
 <ul>
-<li><a href="#about">About</a></li>
-<li><a href="#news">News</a></li>
-<li><a href="#publications">Publications</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#volunteering">Volunteering</a></li>
-<li><a href="gallery.html">Photo Gallery</a></li>
+<li><a class="nav-link active" href="#about">About</a></li>
+<li><a class="nav-link" href="#news">News</a></li>
+<li><a class="nav-link" href="#publications">Publications</a></li>
+<li><a class="nav-link" href="#projects">Projects</a></li>
+<li><a class="nav-link" href="#volunteering">Volunteering</a></li>
+<li><a class="nav-link" href="gallery.html">Photo Gallery</a></li>
 </ul>
 </nav>
 
 
 
-<!-- ABOUT -->
-
 <section id="about">
 
 <div class="about-container">
 
-<img src="images/profile/yingtong-profile.jpg" class="profile-pic">
+<img src="images/profile/yingtong-profile.jpg" class="profile-pic" alt="Yingtong Luo">
 
 <div>
 
 <h1>Yingtong Luo</h1>
 
 <p>
-Final-year Undergraduate Student • Robotics • McGill University
+First-year Master's Student • Robotics • University of Pennsylvania
 </p>
 
 <p>
-I am a final-year undergraduate student in Mechanical Engineering at <a href="https://www.mcgill.ca" target="_blank">McGill University</a>, 
-working under the supervision of Prof. <a href="https://www.shao-lab.com/Learn-more-4469738c5183485884effe68c04e692d" target="_blank">Yi Shao</a> and Prof. <a href="https://www.mcgill.ca/mecheng/inna-sharf" target="_blank">Inna Sharf</a>.
+I am a first-year master's student in Robotics at the <a href="https://www.upenn.edu" target="_blank" rel="noopener noreferrer">University of Pennsylvania</a>, affiliated with the <a href="https://www.grasp.upenn.edu" target="_blank" rel="noopener noreferrer">GRASP Lab</a>. Before joining Penn, I received my undergraduate degree in Mechanical Engineering from <a href="https://www.mcgill.ca" target="_blank" rel="noopener noreferrer">McGill University</a>, where I was advised by Prof. <a href="https://www.shao-lab.com/Learn-more-4469738c5183485884effe68c04e692d" target="_blank" rel="noopener noreferrer">Yi Shao</a> and Prof. <a href="https://www.mcgill.ca/mecheng/inna-sharf" target="_blank" rel="noopener noreferrer">Inna Sharf</a>.
 </p>
 
 <p>
-Starting in Fall 2026, I will join the <a href="https://www.upenn.edu" target="_blank">University of Pennsylvania</a> as a Master's student in Robotics at the <a href="https://www.grasp.upenn.edu" target="_blank">GRASP Lab</a>.
-</p>
-
-<p>
-My research interests lie in robot learning, perception, and their applications in real-world robotic systems, with a focus on enabling intelligent automation through the integration of machine learning and robotic perception.
+    My research interests lie in robot learning, robotic perception, and their applications in real-world robotic systems. I am particularly interested in enabling intelligent automation by integrating machine learning, 3D perception, and robotic decision-making for complex and unstructured environments.
 </p>
 
 <p>
@@ -362,20 +395,18 @@ I am always open to research collaborations, internship or job opportunities, an
 Email: yingtong.luo@mail.mcgill.ca
 </p>
 
-<!-- ICON BUTTONS -->
-
 <div class="icon-row">
 
-<a class="icon-btn" href="https://www.linkedin.com/in/yingtongluo/" target="_blank">
-<i class="fab fa-linkedin"></i>
+<a class="icon-btn" href="https://www.linkedin.com/in/yingtongluo/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+<i class="fab fa-linkedin" aria-hidden="true"></i>
 </a>
 
-<a class="icon-btn" href="https://github.com/yingtongL1023" target="_blank">
-<i class="fab fa-github"></i>
+<a class="icon-btn" href="https://github.com/yingtongL1023" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+<i class="fab fa-github" aria-hidden="true"></i>
 </a>
 
-<a class="icon-btn" href="mailto:yingtong.luo@mail.mcgill.ca">
-<i class="fas fa-envelope"></i>
+<a class="icon-btn" href="mailto:yingtong.luo@mail.mcgill.ca" aria-label="Email">
+<i class="fas fa-envelope" aria-hidden="true"></i>
 </a>
 
 </div>
@@ -388,8 +419,6 @@ Email: yingtong.luo@mail.mcgill.ca
 
 
 
-<!-- NEWS -->
-
 <section id="news">
 
 <h2>News</h2>
@@ -397,43 +426,46 @@ Email: yingtong.luo@mail.mcgill.ca
 <ul>
 
 <li>
-<strong>May 2025</strong> — Received the 2025 McGill University Summer Undergraduate Research in Engineering 
-<a href="https://www.mcgill.ca/engineering/students/undergraduate/research/" target="_blank">
+<strong>April 2026</strong> — Our capstone project "Design of An Anatomically Correct Dynamic Phantom for the TAVR Procedures" was presented at the 
+<a href="https://www.mcgill.ca/engineering/students/undergraduate/mcgill-design-day" target="_blank" rel="noopener noreferrer">McGill Design Day 2026</a>.
+</li>
+
+<li>
+<strong>May 2025</strong> — Received the 2025 McGill University Summer Undergraduate Research in Engineering
+<a href="https://www.mcgill.ca/engineering/students/undergraduate/research/" target="_blank" rel="noopener noreferrer">
 (SURE)
 </a> Award.
 </li>
 
 <li>
-<strong>Apr 2025</strong> — Joined the 
-<a href="https://aerospacemechatronics.lab.mcgill.ca/" target="_blank">
+<strong>Apr 2025</strong> — Joined the
+<a href="https://aerospacemechatronics.lab.mcgill.ca/" target="_blank" rel="noopener noreferrer">
 Aerospace Mechatronics Lab
-</a> at 
-<a href="https://www.mcgill.ca" target="_blank">
+</a> at
+<a href="https://www.mcgill.ca" target="_blank" rel="noopener noreferrer">
 McGill University
 </a>, working on visual SLAM and object detection for timber yard navigation and log-loading automation.
 </li>
 
 <li>
-<strong>Mar 2025</strong> — Our paper 
-<em>"A Synthetic Data Generation Pipeline for Point-Cloud-Based Rebar Segmentation"</em> 
-was accepted at <a href="https://www.iaarc.org/isarc-2025" target="_blank">
-ISARC 2025
-</a>.
+<strong>Mar 2025</strong> — Our paper
+<em>"A Synthetic Data Generation Pipeline for Point-Cloud-Based Rebar Segmentation"</em>
+was accepted at <span class="hang-punct"><a href="https://www.iaarc.org/isarc-2025" target="_blank" rel="noopener noreferrer">ISARC 2025</a>.</span>
 </li>
 
 <li>
-<strong>May 2024</strong> — Received the 2024 McGill University Summer Undergraduate Research in Engineering 
-<a href="https://www.mcgill.ca/engineering/students/undergraduate/research/" target="_blank">
+<strong>May 2024</strong> — Received the 2024 McGill University Summer Undergraduate Research in Engineering
+<a href="https://www.mcgill.ca/engineering/students/undergraduate/research/" target="_blank" rel="noopener noreferrer">
 (SURE)
 </a> Award.
 </li>
 
 <li>
-<strong>Apr 2023</strong> — Joined the 
-<a href="https://www.shao-lab.com/" target="_blank">
+<strong>Apr 2023</strong> — Joined the
+<a href="https://www.shao-lab.com/" target="_blank" rel="noopener noreferrer">
 AIS Construction Lab
-</a> at 
-<a href="https://www.mcgill.ca" target="_blank">
+</a> at
+<a href="https://www.mcgill.ca" target="_blank" rel="noopener noreferrer">
 McGill University
 </a>, working on computer vision and deep learning for construction automation.
 </li>
@@ -448,12 +480,10 @@ McGill University
 
 <h2>Publications</h2>
 
-<!-- Publication 1 -->
-
 <div class="publication">
 
 <div class="pub-image">
-<img src="images/publications/icra_figure.jpg">
+<img src="images/publications/icra_figure.jpg" alt="Figure for 3D object detection paper">
 </div>
 
 <div class="pub-content">
@@ -463,7 +493,7 @@ McGill University
 </div>
 
 <div class="pub-authors">
-Junrui Huang, <strong>Yingtong Luo</strong>, <a href="https://www.mcgill.ca/mecheng/inna-sharf" target="_blank">Inna Sharf</a>
+Junrui Huang, <strong>Yingtong Luo</strong>, <a href="https://www.mcgill.ca/mecheng/inna-sharf" target="_blank" rel="noopener noreferrer">Inna Sharf</a>
 </div>
 
 <div class="pub-venue">
@@ -476,15 +506,13 @@ Submitted for Review
 </div>
 
 
-<div class="pub-divider"></div>
+<div class="pub-divider" aria-hidden="true"></div>
 
-
-<!-- Publication 2 -->
 
 <div class="publication">
 
 <div class="pub-image">
-<img src="images/publications/ISARC2025_profile.jpg">
+<img src="images/publications/ISARC2025_profile.jpg" alt="ISARC 2025 project figure">
 </div>
 
 <div class="pub-content">
@@ -494,7 +522,7 @@ A Synthetic Data Generation Pipeline for Point-Cloud-Based Rebar Segmentation
 </div>
 
 <div class="pub-authors">
-<a href="https://taosun99.github.io/" target="_blank">Tao Sun</a>, <strong>Yingtong Luo</strong>, <a href="https://www.shao-lab.com/Learn-more-4469738c5183485884effe68c04e692d" target="_blank">Yi Shao</a>
+<a href="https://taosun99.github.io/" target="_blank" rel="noopener noreferrer">Tao Sun</a>, <strong>Yingtong Luo</strong>, <a href="https://www.shao-lab.com/Learn-more-4469738c5183485884effe68c04e692d" target="_blank" rel="noopener noreferrer">Yi Shao</a>
 </div>
 
 <div class="pub-venue">
@@ -502,9 +530,9 @@ ISARC 2025
 </div>
 
 <div class="pub-links">
-<a href="files/ISARC-Paper_0305.pdf" target="_blank">[Paper]</a>
-<a href="files/ISARC2025-poster-final.pdf" target="_blank">[Poster]</a>
-<a href="https://yingtongl1023.github.io/ISARC2025_conference/" target="_blank">[Website]</a>
+<a href="files/ISARC-Paper_0305.pdf" target="_blank" rel="noopener noreferrer">[Paper]</a>
+<a href="files/ISARC2025-poster-final.pdf" target="_blank" rel="noopener noreferrer">[Poster]</a>
+<a href="https://yingtongl1023.github.io/ISARC2025_conference/" target="_blank" rel="noopener noreferrer">[Website]</a>
 </div>
 
 </div>
@@ -517,18 +545,48 @@ ISARC 2025
 
 
 
-<!-- PROJECTS -->
-
 <section id="projects">
 
 <h2>Projects</h2>
 
-<!-- Project 1 -->
+<div class="publication">
+
+<div class="pub-image">
+<img src="images/projects/final_assembly.png" alt="McGill mechanical engineering capstone project">
+</div>
+
+<div class="pub-content">
+
+<div class="pub-title">
+Design of An Anatomically Correct Dynamic Phantom for the TAVR Procedures
+</div>
+
+<div class="pub-authors">
+<strong>Yingtong Luo</strong>, Elaine Yang, Aidan Bouden, Glen Gaige, Rosaire Mongrain
+</div>
+
+<div class="pub-venue">
+2026 McGill University mechanical engineering capstone project
+</div>
+
+<div class="pub-links">
+<a href="files/DAN-9_Poster.pdf" target="_blank" rel="noopener noreferrer">[Poster]</a>
+<a href="https://yingtongl1023.github.io/McGill_MECH_ENG_Capstone_Project/" target="_blank" rel="noopener noreferrer">[Website]</a>
+<a href="https://github.com/yingtongL1023/McGill_MECH_ENG_Capstone_Project" target="_blank" rel="noopener noreferrer">[GitHub]</a>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="pub-divider" aria-hidden="true"></div>
+
 
 <div class="publication">
 
 <div class="pub-image">
-<img src="images/projects/SURE2025_profile.jpg">
+<img src="images/projects/SURE2025_profile.jpg" alt="SURE 2025 semantic SLAM project">
 </div>
 
 <div class="pub-content">
@@ -538,7 +596,7 @@ Vision-Based Semantic SLAM for Autonomous Navigation in Mill Yards
 </div>
 
 <div class="pub-authors">
-<strong>Yingtong Luo</strong>, Junrui Huang, <a href="https://www.mcgill.ca/mecheng/inna-sharf" target="_blank">Inna Sharf</a>
+<strong>Yingtong Luo</strong>, Junrui Huang, <a href="https://www.mcgill.ca/mecheng/inna-sharf" target="_blank" rel="noopener noreferrer">Inna Sharf</a>
 </div>
 
 <div class="pub-venue">
@@ -546,7 +604,7 @@ Vision-Based Semantic SLAM for Autonomous Navigation in Mill Yards
 </div>
 
 <div class="pub-links">
-<a href="files/ISARC2025-poster-final.pdf" target="_blank">[Poster]</a>
+<a href="files/ISARC2025-poster-final.pdf" target="_blank" rel="noopener noreferrer">[Poster]</a>
 </div>
 
 </div>
@@ -554,15 +612,13 @@ Vision-Based Semantic SLAM for Autonomous Navigation in Mill Yards
 </div>
 
 
-<div class="pub-divider"></div>
+<div class="pub-divider" aria-hidden="true"></div>
 
-
-<!-- Project 2 -->
 
 <div class="publication">
 
 <div class="pub-image">
-<img src="images/projects/SURE2024_profile.jpg">
+<img src="images/projects/SURE2024_profile.jpg" alt="SURE 2024 rebar pose estimation project">
 </div>
 
 <div class="pub-content">
@@ -572,7 +628,7 @@ Deep Learning-Based Rebar 6D Pose Estimation for Robotic Manipulation
 </div>
 
 <div class="pub-authors">
-<strong>Yingtong Luo</strong>, <a href="https://taosun99.github.io/" target="_blank">Tao Sun</a>, <a href="https://www.shao-lab.com/Learn-more-4469738c5183485884effe68c04e692d" target="_blank">Yi Shao</a>
+<strong>Yingtong Luo</strong>, <a href="https://taosun99.github.io/" target="_blank" rel="noopener noreferrer">Tao Sun</a>, <a href="https://www.shao-lab.com/Learn-more-4469738c5183485884effe68c04e692d" target="_blank" rel="noopener noreferrer">Yi Shao</a>
 </div>
 
 <div class="pub-venue">
@@ -580,7 +636,7 @@ Deep Learning-Based Rebar 6D Pose Estimation for Robotic Manipulation
 </div>
 
 <div class="pub-links">
-<a href="files/YLuo_poster.pdf" target="_blank">[Poster]</a>
+<a href="files/YLuo_poster.pdf" target="_blank" rel="noopener noreferrer">[Poster]</a>
 </div>
 
 </div>
@@ -588,15 +644,13 @@ Deep Learning-Based Rebar 6D Pose Estimation for Robotic Manipulation
 </div>
 
 
-<div class="pub-divider"></div>
+<div class="pub-divider" aria-hidden="true"></div>
 
-
-<!-- Project 3 -->
 
 <div class="publication">
 
 <div class="pub-image">
-<img src="images/projects/393project_profile.jpg">
+<img src="images/projects/393project_profile.jpg" alt="MECH 393 gearbox project">
 </div>
 
 <div class="pub-content">
@@ -610,7 +664,7 @@ Design and Analysis of A Double-Reduction Gearbox for A Solar-Powered Electric A
 </div>
 
 <div class="pub-links">
-<a href="files/Final-Project-Report-MECH-393.pdf" target="_blank">[Report]</a>
+<a href="files/Final-Project-Report-MECH-393.pdf" target="_blank" rel="noopener noreferrer">[Report]</a>
 </div>
 
 </div>
@@ -621,8 +675,6 @@ Design and Analysis of A Double-Reduction Gearbox for A Solar-Powered Electric A
 
 
 
-
-<!-- VOLUNTEERING -->
 
 <section id="volunteering">
 
@@ -631,13 +683,38 @@ Design and Analysis of A Double-Reduction Gearbox for A Solar-Powered Electric A
 <ul>
 
 <li>
-Academic and Campus Life & Engagement Mentor - McGill University <a href="https://mentorship.mcgill.ca/v2/" target="_blank">Mentorship Program</a>
+Academic and Campus Life & Engagement Mentor - McGill University <a href="https://mentorship.mcgill.ca/v2/" target="_blank" rel="noopener noreferrer">Mentorship Program</a>
 <span class="vol-time">(2023 - 2025)</span>
 </li>
 
 </ul>
 
 </section>
+
+<script>
+(function () {
+    var sections = document.querySelectorAll("section[id]");
+    var links = document.querySelectorAll("nav a[href^='#']");
+    if (!sections.length || !links.length) return;
+
+    var observer = new IntersectionObserver(
+        function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                var id = entry.target.id;
+                links.forEach(function (link) {
+                    link.classList.toggle("active", link.getAttribute("href") === "#" + id);
+                });
+            });
+        },
+        { rootMargin: "-32% 0px -42% 0px", threshold: 0 }
+    );
+
+    sections.forEach(function (sec) {
+        observer.observe(sec);
+    });
+})();
+</script>
 
 <footer class="footer">
 © 2026 Yingtong Luo. Last updated: March 2026.

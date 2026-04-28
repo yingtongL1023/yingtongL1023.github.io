@@ -7,148 +7,243 @@
 
 <title>Photo Gallery | Yingtong Luo</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
-body{
-    font-family: Arial, sans-serif;
-    margin:0;
+:root{
+    --bg-page:#f4f6f9;
+    --text:#1c2333;
+    --text-muted:#5c6578;
+    --border:#e2e6ed;
+    --accent:#1e4d8c;
+    --accent-hover:#2563eb;
+    --shadow:0 1px 3px rgba(28,35,51,.08),0 4px 12px rgba(28,35,51,.04);
 }
 
-/* NAVBAR */
+body{
+    font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;
+    margin:0;
+    line-height:1.6;
+    color:var(--text);
+    background:var(--bg-page);
+}
+
+body::before{
+    content:"";
+    display:block;
+    height:3px;
+    background:linear-gradient(90deg,#0f2744,var(--accent-hover),#0f2744);
+}
 
 nav{
     position:sticky;
     top:0;
-    background:white;
-    border-bottom:1px solid #ddd;
+    z-index:50;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:saturate(180%) blur(10px);
+    -webkit-backdrop-filter:saturate(180%) blur(10px);
+    border-bottom:1px solid var(--border);
 }
 
 nav ul{
     display:flex;
     justify-content:center;
+    flex-wrap:wrap;
     list-style:none;
     margin:0;
-    padding:12px;
+    padding:10px 12px;
+    gap:4px 8px;
 }
 
 nav li{
-    margin:0 22px;
+    margin:0 14px;
 }
 
 nav a{
     text-decoration:none;
-    color:#000;
+    color:var(--text);
     font-weight:500;
+    font-size:15px;
+    padding:6px 2px;
+    border-bottom:2px solid transparent;
+    transition:color .2s ease,border-color .2s ease;
 }
 
 nav a:hover{
-    color:#0073e6;
+    color:var(--accent-hover);
 }
 
-/* PAGE */
+nav a.active{
+    color:var(--accent);
+    border-bottom-color:var(--accent-hover);
+}
 
 .container{
     max-width:1000px;
     margin:auto;
-    padding:60px 20px;
+    padding:48px 20px 60px;
 }
 
 h1{
-    margin-bottom:40px;
+    margin:0 0 36px;
+    font-weight:700;
+    font-size:1.75rem;
+    letter-spacing:-.02em;
 }
-
-/* GALLERY GRID */
 
 .gallery-grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:25px;
+    gap:22px;
+}
+
+.gallery-item{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:10px;
+    box-shadow:var(--shadow);
+    transition:box-shadow .25s ease;
+}
+
+.gallery-item:hover{
+    box-shadow:0 4px 12px rgba(28,35,51,.1),0 8px 24px rgba(28,35,51,.06);
 }
 
 .gallery-item img{
     width:100%;
-    height:250px;
+    aspect-ratio:4/3;
+    height:auto;
     object-fit:cover;
     border-radius:8px;
     cursor:pointer;
-    transition:transform 0.25s ease;
+    display:block;
+    transition:transform .25s ease,filter .25s ease;
 }
 
 .gallery-item img:hover{
-    transform:scale(1.05);
+    transform:scale(1.02);
+    filter:brightness(1.03);
 }
 
-/* LOCATION TEXT */
+@media (prefers-reduced-motion: reduce){
+    .gallery-item img{
+        transition:none;
+    }
+    .gallery-item img:hover{
+        transform:none;
+    }
+}
 
 .photo-location{
-    margin-top:8px;
+    margin-top:10px;
     font-size:14px;
-    color:#555;
+    color:var(--text-muted);
+    padding:0 4px 4px;
 }
 
 .photo-location i{
     margin-right:6px;
-    color:#888;
+    color:#8892a6;
 }
-
-/* LIGHTBOX */
 
 .lightbox{
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.9);
-    display:none;
+    inset:0;
+    background:rgba(15,23,42,.92);
+    display:flex;
     justify-content:center;
     align-items:center;
     z-index:1000;
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity .22s ease,visibility .22s ease;
+    padding:24px;
+}
+
+.lightbox.is-open{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
 }
 
 .lightbox img{
-    max-width:90%;
-    max-height:85%;
+    max-width:min(92vw,1200px);
+    max-height:85vh;
     border-radius:10px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    transform:scale(.96);
+    transition:transform .22s ease;
+}
+
+.lightbox.is-open img{
+    transform:scale(1);
+}
+
+@media (prefers-reduced-motion: reduce){
+    .lightbox,
+    .lightbox img{
+        transition:none;
+    }
+    .lightbox img{
+        transform:none;
+    }
 }
 
 .lightbox-close{
     position:absolute;
-    top:25px;
-    right:40px;
-    font-size:40px;
-    color:white;
+    top:20px;
+    right:24px;
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:10px;
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    font-size:28px;
+    line-height:1;
     cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .2s ease;
 }
 
-/* FOOTER */
+.lightbox-close:hover{
+    background:rgba(255,255,255,.22);
+}
+
+.lightbox-close:focus-visible{
+    outline:2px solid #fff;
+    outline-offset:2px;
+}
 
 .footer{
     text-align:center;
     font-size:14px;
-    color:#666;
-    margin-top:60px;
-    padding:30px 0;
-    border-top:1px solid #eee;
+    color:var(--text-muted);
+    margin-top:40px;
+    padding:28px 16px 40px;
+    border-top:1px solid var(--border);
 }
-
-/* MOBILE NAVBAR FIX */
 
 @media (max-width:768px){
 
 nav ul{
-    flex-wrap:wrap;
+    padding:8px;
 }
 
 nav li{
-    margin:8px 12px;
+    margin:6px 10px;
 }
 
 }
-
 
 </style>
 
@@ -157,14 +252,14 @@ nav li{
 
 <body>
 
-<nav>
+<nav aria-label="Primary">
 <ul>
 <li><a href="index.html#about">About</a></li>
 <li><a href="index.html#news">News</a></li>
 <li><a href="index.html#publications">Publications</a></li>
 <li><a href="index.html#projects">Projects</a></li>
 <li><a href="index.html#volunteering">Volunteering</a></li>
-<li><a href="gallery.html">Photo Gallery</a></li>
+<li><a class="active" href="gallery.html">Photo Gallery</a></li>
 </ul>
 </nav>
 
@@ -176,107 +271,107 @@ nav li{
 <div class="gallery-grid">
 
 <div class="gallery-item">
-<img src="images/gallery/Moraine_lake.jpg">
+<img src="images/gallery/Moraine_lake.jpg" alt="Moraine Lake, Alberta">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Moraine Lake, AB
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Moraine Lake, AB
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Yoho_park.jpg">
+<img src="images/gallery/Yoho_park.jpg" alt="Yoho National Park">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Yoho National Park, BC
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Yoho National Park, BC
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Yoho_park2.jpg">
+<img src="images/gallery/Yoho_park2.jpg" alt="Yoho National Park">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Yoho National Park, BC
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Yoho National Park, BC
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Yoho_park3.jpg">
+<img src="images/gallery/Yoho_park3.jpg" alt="Yoho National Park">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Yoho National Park, BC
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Yoho National Park, BC
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Canmore.jpg">
+<img src="images/gallery/Canmore.jpg" alt="Canmore, Alberta">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Canmore, AB
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Canmore, AB
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Vancouver.jpg">
+<img src="images/gallery/Vancouver.jpg" alt="Vancouver">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Vancouver, BC
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Vancouver, BC
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Tremblent.jpg">
+<img src="images/gallery/Tremblent.jpg" alt="Mont Tremblant">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Mont Tremblant, QC
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Mont Tremblant, QC
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Cancun.jpg">
+<img src="images/gallery/Cancun.jpg" alt="Cancun">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Cancun, Mexico
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Cancun, Mexico
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Tulum.jpg">
+<img src="images/gallery/Tulum.jpg" alt="Tulum">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Tulum, Mexico
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Tulum, Mexico
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/solar_eclipse.jpg">
+<img src="images/gallery/solar_eclipse.jpg" alt="Solar eclipse in Montreal">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Montreal, QC
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Montreal, QC
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/NASA1.jpg">
+<img src="images/gallery/NASA1.jpg" alt="Orlando, NASA">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Orlando, FL
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Orlando, FL
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/NASA2.jpg">
+<img src="images/gallery/NASA2.jpg" alt="Orlando, NASA">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Orlando, FL
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Orlando, FL
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/NASA3.jpg">
+<img src="images/gallery/NASA3.jpg" alt="Orlando, NASA">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Orlando, FL
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Orlando, FL
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Artemis2.jpg">
+<img src="images/gallery/Artemis2.jpg" alt="Cape Canaveral">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Cape Canaveral, FL
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Cape Canaveral, FL
 </div>
 </div>
 
 <div class="gallery-item">
-<img src="images/gallery/Lima1.jpg">
+<img src="images/gallery/Lima1.jpg" alt="Lima, Peru">
 <div class="photo-location">
-<i class="fa-solid fa-location-dot"></i>Lima, Peru
+<i class="fa-solid fa-location-dot" aria-hidden="true"></i>Lima, Peru
 </div>
 </div>
 
@@ -284,40 +379,83 @@ nav li{
 
 </div>
 
-<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview" hidden>
 
-<div class="lightbox" id="lightbox">
+<button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
 
-<span class="lightbox-close" onclick="closeLightbox()">×</span>
-
-<img id="lightbox-img">
+<img id="lightbox-img" alt="">
 
 </div>
 
 
 <script>
+(function () {
+    var images = document.querySelectorAll(".gallery-item img");
+    var lightbox = document.getElementById("lightbox");
+    var lightboxImg = document.getElementById("lightbox-img");
+    var closeBtn = document.getElementById("lightbox-close");
+    var lastFocus = null;
 
-const images = document.querySelectorAll(".gallery-item img");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-
-images.forEach(img => {
-    img.addEventListener("click", () => {
-        lightbox.style.display = "flex";
-        lightboxImg.src = img.src;
-    });
-});
-
-function closeLightbox(){
-    lightbox.style.display = "none";
-}
-
-lightbox.addEventListener("click", e => {
-    if(e.target !== lightboxImg){
-        closeLightbox();
+    function openLightbox(src, altText) {
+        lastFocus = document.activeElement;
+        lightbox.hidden = false;
+        lightboxImg.src = src;
+        lightboxImg.alt = altText || "";
+        requestAnimationFrame(function () {
+            lightbox.classList.add("is-open");
+        });
+        closeBtn.focus();
+        document.body.style.overflow = "hidden";
     }
-});
 
+    function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        document.body.style.overflow = "";
+        var restore = lastFocus;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            lightbox.hidden = true;
+            lightboxImg.src = "";
+            lightboxImg.alt = "";
+            if (restore && typeof restore.focus === "function") restore.focus();
+            return;
+        }
+        lightbox.addEventListener("transitionend", function onEnd(e) {
+            if (e.target !== lightbox || e.propertyName !== "opacity") return;
+            lightbox.removeEventListener("transitionend", onEnd);
+            if (!lightbox.classList.contains("is-open")) {
+                lightbox.hidden = true;
+                lightboxImg.src = "";
+                lightboxImg.alt = "";
+                if (restore && typeof restore.focus === "function") restore.focus();
+            }
+        });
+    }
+
+    images.forEach(function (img) {
+        img.addEventListener("click", function () {
+            openLightbox(img.src, img.alt);
+        });
+    });
+
+    closeBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        closeLightbox();
+    });
+
+    lightbox.addEventListener("click", function (e) {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    lightboxImg.addEventListener("click", function (e) {
+        e.stopPropagation();
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && lightbox.classList.contains("is-open")) {
+            closeLightbox();
+        }
+    });
+})();
 </script>
 
 <footer class="footer">
